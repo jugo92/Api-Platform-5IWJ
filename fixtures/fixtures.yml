@@ -1,0 +1,32 @@
+# fixtures.yaml
+
+App\Entity\Category:
+    category{1..5}:
+        name: <word()>
+
+App\Entity\Ingredient:
+    ingredient{1..10}:
+        name: <word()>
+        quantity: <numberBetween(1, 100)>
+
+App\Entity\Comment:
+    comment{1..20}:
+        content: <sentence()>
+        recipe: '@recipe*'
+
+App\Entity\Recipe:
+    recipe{1..10}:
+        title: <sentence(5)>
+        createdAt: <dateTimeThisYear()>
+        instructions: <paragraph()>
+        preparationTime: <numberBetween(10, 120)>
+        difficulty: <randomElement(["Easy", "Moderate", "Difficult"])>
+        category: '@category*'
+        comments: ['@comment*']
+
+App\Entity\Quantity:
+    quantity{1..10}:
+        unit: <randomElement(["g", "mg", "cg"])>
+        amount: <numberBetween(10, 120)>
+        recipe: '@recipe*'
+        ingredient: '@ingredient*'
