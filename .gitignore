@@ -4,3 +4,6 @@ Dockerfile
 docker/
 db_data
 vendor/
+var/
+
+.env.local

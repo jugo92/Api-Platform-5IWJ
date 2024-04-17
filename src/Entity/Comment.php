@@ -5,6 +5,11 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ApiResource(

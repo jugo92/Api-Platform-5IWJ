@@ -5,9 +5,22 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\QuantityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
 
 #[ORM\Entity(repositoryClass: QuantityRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post(),
+        new Put(),
+        new Patch()
+    ],
+)]
 class Quantity
 {
     #[ORM\Id]
