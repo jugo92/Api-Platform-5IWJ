@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     operations: [
         new Get(),
         new GetCollection(),
@@ -34,7 +35,7 @@ class Category
 
     #[ORM\Column(length: 255)]
     #[ApiFilter(SearchFilter::class,strategy: SearchFilter::STRATEGY_IEXACT)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Recipe::class)]

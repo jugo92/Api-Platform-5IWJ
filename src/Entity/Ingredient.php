@@ -16,6 +16,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 #[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     operations: [
         new Get(),
         new GetCollection(),
@@ -32,12 +34,11 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $quantity = null;
-
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: Quantity::class)]
+    #[Groups(['read', 'write'])]
     private Collection $quantities;
 
     public function __construct()

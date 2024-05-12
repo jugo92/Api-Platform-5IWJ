@@ -14,6 +14,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: QuantityRepository::class)]
 #[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
     operations: [
         new Get(),
         new GetCollection(),
@@ -30,17 +32,21 @@ class Quantity
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     private ?string $unit = null;
 
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     private ?int $amount = null;
 
     #[ORM\ManyToOne(inversedBy: 'quantities')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read'])]
     private ?Recipe $recipe = null;
 
     #[ORM\ManyToOne(inversedBy: 'quantities')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read', 'write'])]
     private ?Ingredient $ingredient = null;
 
     public function getId(): ?int
