@@ -17,8 +17,8 @@ use ApiPlatform\Metadata\Patch;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(),
-        new GetCollection(),
+        new Get(normalizationContext: ['groups' => ['user:read']]),
+        new GetCollection(normalizationContext: ['groups' => ['user:read']]),
         new Post(),
         new Put(),
         new Patch()
