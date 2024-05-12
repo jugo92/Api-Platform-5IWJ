@@ -13,6 +13,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Patch;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ApiResource(
@@ -35,6 +36,7 @@ class Recipe
 
     #[ORM\Column(length: 255)]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column]
@@ -42,14 +44,17 @@ class Recipe
 
     #[ORM\Column(length: 1000)]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?string $instructions = null;
 
     #[ORM\Column]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?int $preparationTime = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?string $difficulty = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]

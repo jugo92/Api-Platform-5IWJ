@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Patch;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ApiResource(
@@ -32,6 +33,7 @@ class Comment
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]

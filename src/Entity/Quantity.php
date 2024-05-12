@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Patch;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuantityRepository::class)]
 #[ApiResource(
@@ -33,10 +34,12 @@ class Quantity
 
     #[ORM\Column(length: 255)]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?string $unit = null;
 
     #[ORM\Column]
     #[Groups(['read', 'write'])]
+    #[Assert\NotBlank]
     private ?int $amount = null;
 
     #[ORM\ManyToOne(inversedBy: 'quantities')]
